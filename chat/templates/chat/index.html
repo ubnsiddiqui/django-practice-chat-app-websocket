@@ -3,7 +3,7 @@
 {% block content %}
 <div class="form-group">
     <label for="room-name-input">What chat room would you like to enter?</label>
-{#    <input type="text" class="form-control" id="room-name-input">#}
+    <input type="text" class="form-control" id="room-name-input">
     <div class="btn-group">
   <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Login Users <span class="caret"></span>
@@ -12,7 +12,7 @@
     {% for user in users %}
       {% if user != request.user %}
         <li>
-        <a class="room-name-submit" style="text-decoration: none" href="">{{ user.username }}</a>
+        <a class="room-name-submit" style="text-decoration: none" >{{ user.username }}</a>
     </li>
       {% endif %}
       {% endfor %}
@@ -34,7 +34,7 @@
 
     $("#room-name-submit").click(function() {
       var room_name = $("#room-name-input").val();
-      window.location.pathname = '/chat/chat_' + room_name + '';
+      window.location.pathname = '/chat/chat_' + room_name + '_{{ uid4 }}/';
     });
 </script>
 {% endblock %}
