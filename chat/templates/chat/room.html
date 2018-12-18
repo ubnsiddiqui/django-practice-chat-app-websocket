@@ -65,7 +65,42 @@
                 </div>
             </div>
         </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-user"></span>Joined Users
+                </div>
+                <div class="panel-body">
+                    {% for usr in room %}
+                    {% for user in users %}
+                        {% if usr.user_id == user.id %}
+                        <li>
+                        <p>{{ user.username }}</p>
+                    </li>
+                        {% endif %}
+                        {% endfor %}
+                {% endfor %}
     </div>
+    </div>
+    </div>
+{#     <div class="btn-group">#}
+{#            <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown"#}
+{#                    aria-haspopup="true" aria-expanded="false">#}
+{#                Chat Rooms Available <span class="caret"></span>#}
+{#            </button>#}
+{#            <ul class="dropdown-menu">#}
+{#                {% for usr in room %}#}
+{#                    {% for user in users %}#}
+{#                        {% if usr.user_id == user.id %}#}
+{#                        <li>#}
+{#                        <p>{{ user.username }}</p>#}
+{#                    </li>#}
+{#                        {% endif %}#}
+{#                        {% endfor %}#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
 {% endblock %}
 
 {% block js %}
@@ -111,5 +146,9 @@
           $('#btn-input').val('');
 
         });
+    $(document).ready(function () {
+
+        
+    })
 </script>
 {% endblock %}

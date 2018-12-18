@@ -18,8 +18,22 @@
                 {% endfor %}
             </ul>
         </div>
+    <input id="room-name-submit" class="btn btn-success" type="button" value="Create New Room"/>
+    <div class="glyphicon glyphicon-user">
+    <span>Login Users</span>
+    <ul>
+        {% for usr in rooms %}
+        {% for user in users %}
+            {% if usr.user_id == user.id %}
+            <li>{{ user.username }}</li>
+            {% endif %}
+        {% endfor %}
+
+        {% endfor %}
+
+    </ul>
     </div>
-    <input id="room-name-submit" class="btn btn-success" type="button" value="Enter"/>
+    </div>
 {% endblock %}
 
 
