@@ -2,13 +2,22 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+class Room(models.Model):
+    name = models.TextField(max_length=150)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
 class Message(models.Model):
     """
     Model to represent user submitted changed to a resource guide
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group_name = models.TextField()
+    # group_name = models.ForeignKey(Room, related_name='Room',on_delete=models.CASCADE)
+    group_name = models.TextField(max_length=150)
     message = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
 
@@ -18,3 +27,5 @@ class Message(models.Model):
         """
 
         return self.message
+
+

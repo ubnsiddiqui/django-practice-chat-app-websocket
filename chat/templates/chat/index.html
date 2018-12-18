@@ -1,40 +1,40 @@
 {% extends "base.html" %}
 {% block title %}Talko{% endblock %}
 {% block content %}
-<div class="form-group">
-    <label for="room-name-input">What chat room would you like to enter?</label>
-    <input type="text" class="form-control" id="room-name-input">
-    <div class="btn-group">
-  <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Login Users <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    {% for user in users %}
-      {% if user != request.user %}
-        <li>
-        <a class="room-name-submit" style="text-decoration: none" >{{ user.username }}</a>
-    </li>
-      {% endif %}
-      {% endfor %}
-  </ul>
-</div>
-</div>
-    <input id="room-name-submit" class="btn btn-success" type="button" value="Enter" />
+    <div class="form-group">
+        <label for="room-name-input">What chat room would you like to enter?</label>
+        <input type="text" class="form-control" id="room-name-input">
+        <div class="btn-group">
+            <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                Chat Rooms Available <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                {% for chatroom in chatrooms %}
+                    <li>
+                        <a class="room-name-submit" style="text-decoration: none"
+                           href="{% url 'chat_room' chatroom %}">{{ chatroom }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <input id="room-name-submit" class="btn btn-success" type="button" value="Enter"/>
 {% endblock %}
 
 
 {% block js %}
-<script>
-    $("#room-name-input").focus();
-    $("#room-name-input").keyup(function(e){
-      if (e.keyCode === 13) {  // enter, return
-            $("#room-name-submit").click();
-        }
-    });
+    <script>
+        $("#room-name-input").focus();
+        $("#room-name-input").keyup(function (e) {
+            if (e.keyCode === 13) {  // enter, return
+                $("#room-name-submit").click();
+            }
+        });
 
-    $("#room-name-submit").click(function() {
-      var room_name = $("#room-name-input").val();
-      window.location.pathname = '/chat/chat_' + room_name + '_{{ uid4 }}/';
-    });
-</script>
+        $("#room-name-submit").click(function () {
+            var room_name = $("#room-name-input").val();
+            window.location.pathname = '/chat/' + room_name;
+        });
+    </script>
 {% endblock %}
