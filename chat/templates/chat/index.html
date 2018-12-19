@@ -2,36 +2,62 @@
 {% block title %}Talko{% endblock %}
 {% block content %}
     <div class="form-group">
-        <label for="room-name-input">What chat room would you like to enter?</label>
+        <label for="room-name-input">Type Name To Create A New Chat Room</label>
         <input type="text" class="form-control" id="room-name-input">
-        <div class="btn-group">
-            <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                Chat Rooms Available <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                {% for chatroom in chatrooms %}
-                    <li>
-                        <a class="room-name-submit" style="text-decoration: none"
+{#        <div class="btn-group">#}
+{#            <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown"#}
+{#                    aria-haspopup="true" aria-expanded="false">#}
+{#                Chat Rooms Available <span class="caret"></span>#}
+{#            </button>#}
+{#           #}
+{#        </div>#}
+    <input id="room-name-submit" class="btn btn-success" type="button" value="Create New Room"/>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="panel-info">
+                Chat Rooms Available
+            </div>
+        </div>
+        <div class="panel-body">
+             <div class="list-group">
+                 {% for chatroom in chatrooms %}
+                    <li style="list-style-type: none">
+                        <a class="room-name-submit list-group-item" style="text-decoration: none"
                            href="{% url 'chat_room' chatroom %}">{{ chatroom }}</a>
                     </li>
                 {% endfor %}
-            </ul>
+             </div>
         </div>
-    <input id="room-name-submit" class="btn btn-success" type="button" value="Create New Room"/>
-    <div class="glyphicon glyphicon-user">
-    <span>Login Users</span>
-    <ul>
-        {% for usr in rooms %}
+    </div>
+{#    <div class="glyphicon glyphicon-user">#}
+{#    <span>Login Users</span>#}
+{#    <ul>#}
+{#        {% for usr in rooms %}#}
+{#        {% for user in users %}#}
+{#            {% if usr.user_id == user.id %}#}
+{#            <li>{{ user.username }}</li>#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{##}
+{#        {% endfor %}#}
+{##}
+{#    </ul>#}
+{#    </div>#}
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="panel-title glyphicon glyphicon-user">Logged Users</div>
+        </div>
+        <div class="panel-body">
+        <div class="list-group">
+            {% for usr in logusrs %}
         {% for user in users %}
-            {% if usr.user_id == user.id %}
-            <li>{{ user.username }}</li>
+            {% if usr.username == user.username %}
+            <div class="list-group-item" style="list-style-type: none"><li>{{ user.username }}</li></div>
             {% endif %}
         {% endfor %}
-
         {% endfor %}
-
-    </ul>
+        </div>
+        </div>
     </div>
     </div>
 {% endblock %}
@@ -50,5 +76,6 @@
             var room_name = $("#room-name-input").val();
             window.location.pathname = '/chat/' + room_name;
         });
+
     </script>
 {% endblock %}

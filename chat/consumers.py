@@ -5,7 +5,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from django.conf import settings
 
-from .models import Message, Room
+from .models import Message, Room, LoggedUser
 
 
 class ChatConsumer(WebsocketConsumer):
@@ -20,7 +20,9 @@ class ChatConsumer(WebsocketConsumer):
             user=self.scope['user'],
             name=self.room_group_name
         )
-
+        obj, created = LoggedUser.objects.get_or_create(
+            username=self.scope['user']
+        )
         if self.scope["user"].is_anonymous:
             self.close()
         else:
@@ -33,6 +35,8 @@ class ChatConsumer(WebsocketConsumer):
             self.channel_name
         )
         Room.objects.filter(user=self.scope['user'], name=self.room_group_name).delete()
+        LoggedUser.objects.filter(username=self.scope['user']).delete()
+
 
     # Receive message from WebSocket
     def receive(self, text_data):

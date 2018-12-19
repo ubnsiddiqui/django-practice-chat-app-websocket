@@ -72,16 +72,19 @@
                     <span class="glyphicon glyphicon-user"></span>Joined Users
                 </div>
                 <div class="panel-body">
-                    {% for usr in room %}
+                <div class="list-group">
+                        {% for usr in room %}
                     {% for user in users %}
                         {% if usr.user_id == user.id %}
-                        <li>
-                        <p>{{ user.username }}</p>
+                        <div class="list-group-item" style="list-style-type: none">
+                            <li>
+                        {{ user.username }}
                     </li>
+                        </div>
                         {% endif %}
                         {% endfor %}
                 {% endfor %}
-    </div>
+                </div>
     </div>
     </div>
 {#     <div class="btn-group">#}

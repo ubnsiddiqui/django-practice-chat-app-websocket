@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
-from .models import Message, Room
+from .models import Message, Room, LoggedUser
 
 
 # Create your views here.
@@ -11,9 +11,9 @@ from .models import Message, Room
 def index(request):
     # uid4 = str(uuid.uuid4())
     user = User.objects.all()
-    room = Room.objects.all()
+    logusr = LoggedUser.objects.all()
     chatrooms = Message.objects.all().values_list('group_name', flat=True).distinct()
-    return render(request, 'chat/index.html', {'chatrooms': chatrooms,'rooms':room,'users':user})
+    return render(request, 'chat/index.html', {'chatrooms': chatrooms, 'logusrs': logusr, 'users': user})
 
 
 @login_required

@@ -29,3 +29,9 @@ class Message(models.Model):
         return self.message
 
 
+class LoggedUser(models.Model):
+    username = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.username
+
